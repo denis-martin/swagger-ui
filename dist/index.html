@@ -37,7 +37,11 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "http://petstore.swagger.io/v2/swagger.json";
+	    if (window.parent.Swadit) {
+          url = window.parent.Swadit.downloadUrl;
+		} else {
+		  url = "";
+		}
       }
 
       hljs.configure({
@@ -74,7 +78,8 @@
         docExpansion: "none",
         jsonEditor: false,
         defaultModelRendering: 'schema',
-        showRequestHeaders: false
+        showRequestHeaders: false,
+		validatorUrl: null
       });
 
       window.swaggerUi.load();

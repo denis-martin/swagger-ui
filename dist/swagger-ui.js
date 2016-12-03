@@ -3550,6 +3550,10 @@ SwaggerClient.prototype.build = function (mock) {
     this.progress('fetching resource list: ' + this.url + '; Please wait.');
   }
 
+  var blobIndex = this.url.indexOf("blob:");
+  if (blobIndex > 0) {
+    this.url = this.url.substr(blobIndex);
+  }
   var obj = {
     useJQuery: this.useJQuery,
     jqueryAjaxCache: this.jqueryAjaxCache,
@@ -3562,7 +3566,7 @@ SwaggerClient.prototype.build = function (mock) {
     },
     on: {
       error: function (response) {
-        if (self.url.substring(0, 4) !== 'http') {
+        if (self.url.substring(0, 4) !== 'http' && self.url.substring(0, 4) !== 'blob') {
           return self.fail('Please specify the protocol for ' + self.url);
         } else if (response.errObj && (response.errObj.code === 'ECONNABORTED' || response.errObj.message.indexOf('timeout') !== -1)) {
           return self.fail('Request timed out after ' + self.fetchSpecTimeout + 'ms');
@@ -21753,7 +21757,7 @@ window.SwaggerUi = Backbone.Router.extend({
       this.authView.remove();
     }
     var url = this.options.url;
-    if (url && url.indexOf('http') !== 0) {
+    if (url && url.indexOf('http') !== 0 && url.indexOf('blob') !== 0) {
       url = this.buildUrl(window.location.href.toString(), url);
     }
     if(this.api) {
