@@ -1,5 +1,8 @@
 # Swagger UI
 
+This fork is only for the old [swaditjs](https://github.com/denis-martin/swadit/tree/javascript) and no longer maintained. The current version of [swadit](https://github.com/denis-martin/swadit) uses the npm package swagger-ui-dist.
+
+
 [![Build Status](https://travis-ci.org/swagger-api/swagger-ui.svg?branch=master)](https://travis-ci.org/swagger-api/swagger-ui)
 [![NPM version](https://badge.fury.io/js/swagger-ui.svg)](http://badge.fury.io/js/swagger-ui)
 
